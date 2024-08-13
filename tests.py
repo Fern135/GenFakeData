@@ -29,7 +29,8 @@ async def run_requests(num_requests, urls, label):
     
     end_time = time.perf_counter()
     elapsed_time = end_time - start_time
-    print(f"Time taken for {num_requests} requests with {label}\t {elapsed_time:.2f} seconds")
+    # print(f"Time taken for {num_requests} requests with {label}\t {elapsed_time:.2f} seconds")
+    print(f"Time taken for {num_requests} --------------------> {elapsed_time:.2f} seconds")
 
 
 def generate_urls(base_url, endpoint, count, num_requests):
@@ -42,25 +43,21 @@ def generate_urls(base_url, endpoint, count, num_requests):
 
 
 async def main():
-    counts = [10, 30, 60]  # Fixed 0 to 10
+    counts = [10, 30, 60]  
     
     tasks = []
     for count in counts:
         num_requests = count
         
         for endpoint in endpoints:
-            # Generate URLs
             urls_with_count = generate_urls(BASE_URL, endpoint, 10, num_requests)
             urls_without_count = generate_urls(BASE_URL, endpoint, '', num_requests)
             
-            # Create tasks for running requests
             tasks.append(run_requests(num_requests, urls_with_count, f"{endpoint} with '?count=10'"))
             tasks.append(run_requests(num_requests, urls_without_count, f"{endpoint} without '?count=10'"))
 
-    # Run all tasks concurrently
     await asyncio.gather(*tasks)
 
-# Run the asyncio program
 if __name__ == "__main__":
     asyncio.run(main())
 
