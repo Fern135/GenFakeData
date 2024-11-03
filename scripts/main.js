@@ -4,22 +4,23 @@ if(getOS() === "Windows"){
     var baseUrl   = "127.0.0.1:3000";
 }
 // const url       = `${baseUrl}/api/`;
-const url       = `localhost:3000/api/`;
+var url       = `localhost:3000/api/`;
 
 //#region getting length and button. to check if it's clicked
 
 //#region for generating users
-function genUsers(){
+async function genUsers(){
     let genUsrCount = document.getElementById("gen-user-count").value;
     // let genUsrBtn   = document.getElementById("gen-user-btn");
+    var Url = ``;
 
     if(genUsrCount <= 1 && genUsrCount < 14000){
-        var Url = `${url}/${genUsrCount}`;
+        var Url = `${url}users/${genUsrCount}`;
     }
 
-    fetch(Url)
-    .then(x => x.json())
-    .then(y => displayGenUser(y));
+    let x = await fetch(Url);
+    let y = await x.json();
+    displayGenUser(y);
 }
 
 async function loadRandUsrImg() {
@@ -65,7 +66,7 @@ function displayGenUser(data){
             entry.innerHTML = `
                 <div class="card">
                     <div class="card-header">
-                        <img id="randomImage" src="${loadRandUsrImg()}" alt="Random Person">
+                        <img class="img-fluid rounded" id="randomImage" src="${loadRandUsrImg()}" alt="Random Person">
                     </div>
                     <div class="card-body" id="${item.str_id}">
                         <h3>Name:  ${item.name}</h3>
