@@ -6,10 +6,15 @@ npm     version needed 9.5.1    ^
 
 ## use either
 ```
-npm run dev
+npm run build
 ```
 
 or 
+
+```
+npm install
+```
+then 
 
 ```
 node index.js
