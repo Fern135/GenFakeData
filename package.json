@@ -4,6 +4,7 @@
   "description": "generating fake data with node.js express.",
   "main": "index.js",
   "scripts": {
+    "build" : "docker compose up --build",
     "dev": "node --watch --trace-warnings index.js",
     "production": "node --trace-warnings index.js"
   },
