@@ -6,6 +6,9 @@ const app = express();
 const operatingSys = util.getOs();
 
 app.use('/api', dataRoutes); // localhost:3000/api/
+app.get('/ping', (req, res) => res.send('pong'));
+app.get("/", (req, res) => res.send('it work'));
+
 
 app.use((req, res, next) => {
     res.status(404).send('Not Found');
