@@ -1,12 +1,12 @@
+import asyncio
 import time
-import threading
 from django.http import JsonResponse
 
 # Max requests a single IP can make within a 1-second window
 RATE_LIMIT = 10
 
-# Lock to prevent race conditions when multiple workers read/write _requests
-_lock = threading.Lock()
+# Async lock to prevent race conditions across coroutines
+_lock = asyncio.Lock()
 
 # In-memory store: maps each IP to a list of request timestamps
 _requests: dict[str, list[float]] = {}
@@ -21,17 +21,20 @@ def _get_ip(request) -> str:
 
 
 class RateLimitMiddleware:
+    async_capable = True
+    sync_capable = False
+
     def __init__(self, get_response):
         self.get_response = get_response
 
-    def __call__(self, request):
+    async def __call__(self, request):
         ip = _get_ip(request)
         now = time.monotonic()
 
         # Only keep timestamps within the last 1 second (sliding window)
         window_start = now - 1.0
 
-        with _lock:
+        async with _lock:
             timestamps = _requests.get(ip, [])
 
             # Drop timestamps outside the current window
@@ -48,4 +51,4 @@ class RateLimitMiddleware:
             timestamps.append(now)
             _requests[ip] = timestamps
 
-        return self.get_response(request)
+        return await self.get_response(request)

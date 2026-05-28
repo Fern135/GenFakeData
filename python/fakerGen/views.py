@@ -8,6 +8,7 @@ Faker.seed(random.random())
 
 
 def _build_users(count):
+    print("building users")
     return [
         {
             "id": i + 1,
@@ -19,6 +20,7 @@ def _build_users(count):
     ]
 
 def _build_products(count):
+    print("building products")
     return [
         {
             "id": i + 1,
@@ -30,6 +32,7 @@ def _build_products(count):
     ]
 
 def _build_companies(count):
+    print("building companies")
     return [
         {
             "id": i + 1,
@@ -41,6 +44,7 @@ def _build_companies(count):
     ]
 
 def _build_credit_cards(count):
+    print("building cc")
     card_types = ["Visa", "MasterCard", "American Express", "Discover"]
     return [
         {
@@ -53,6 +57,7 @@ def _build_credit_cards(count):
     ]
 
 def _build_jobs(count):
+    print("building jobs")
     return [
         {
             "id": i + 1,
@@ -64,6 +69,7 @@ def _build_jobs(count):
     ]
 
 def _build_text(count):
+    print("building text")
     return [
         {
             "id": i + 1,
