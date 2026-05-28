@@ -26,12 +26,12 @@ const PORT = 3000;
 app.listen(PORT, () => {
     switch(operatingSys) { 
         case 'win32':
-            console.log(`Server running on => localhost:${PORT}`);
+            console.log(`Server running on => localhost:${PORT}/api/`);
             break;
 
         case 'darwin':
         case 'linux':
-            console.log(`Server running on => 127.0.0.1:${PORT}`);
+            console.log(`Server running on => 127.0.0.1:${PORT}/api/`);
             break;
 
         default:
