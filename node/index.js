@@ -1,10 +1,12 @@
 const express = require('express');
 const dataRoutes = require('./routes/dataRoutes');
 const util = require("./lib/util");
+const rateLimitMiddleware = require('./lib/rateLimit');
 
 const app = express();
 const operatingSys = util.getOs();
 
+app.use(rateLimitMiddleware);
 app.use('/api', dataRoutes); // localhost:3000/api/
 app.get('/ping', (req, res) => res.send('pong'));
 app.get("/", (req, res) => res.send('it work'));

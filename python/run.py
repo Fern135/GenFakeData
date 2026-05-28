@@ -2,8 +2,8 @@ import os
 import platform
 import subprocess
 
-APP = os.environ.get("APP", "app")
-WORKERS = 4 + 1
+APP = os.environ.get("APP", "genFakeData")
+WORKERS = 10 + 1
 IS_WINDOWS = platform.system() == "Windows"
 
 

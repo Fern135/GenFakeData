@@ -6,7 +6,6 @@ fake = Faker()
 Faker.seed(random.random())
 
 
-maxRequests = 14000
 
 
 def genUsers(request, count=10):
@@ -29,7 +28,7 @@ def genProducts(request, count=10):
         data.append(
             {
                 "id" : i + 1,
-                "name" : fake.ecommerce_name(),
+                "name" : f"{fake.word().capitalize()} {fake.word().capitalize()}",
                 "price" : fake.pricetag(),
                 "category" : fake.bs(),
             }
